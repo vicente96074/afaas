@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: eureka-service
+  cloud:
+    config:
+      enabled: true
+      uri: ${CONFIG_SERVER_URL}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: env

@@ -1,0 +1,57 @@
+server:
+  port: 8080
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      default-zone: ${EUREKA_SERVER_URL}
+  instance:
+    hostname: localhost
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/user-service/**
+          filters:
+            - AuthFilter
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/**
+        - id: branch-service
+          uri: lb://branch-service
+          predicates:
+            - Path=/api/branch-service/**
+          filters:
+            - AuthFilter
+        - id: storage-service
+          uri: lb://storage-service
+          predicates:
+            - Path=/api/storage-service/**
+          filters:
+            - AuthFilter
+        - id: client-service
+          uri: lb://client-service
+          predicates:
+            - Path=/api/client-service/**
+          filters:
+            - AuthFilter
+        - id: cashier-service
+          uri: lb://cashier-service
+          predicates:
+            - Path=/api/cashier-service/**
+          filters:
+            - AuthFilter
+        - id: payment-service
+          uri: lb://payment-service
+          predicates:
+            - Path=/api/payment-service/**
+          filters:
+            - AuthFilter

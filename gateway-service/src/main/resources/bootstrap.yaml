@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    config:
+      enabled: true
+      uri: ${CONFIG_SERVER_URL}
+  main:
+    web-application-type: reactive
+    allow-bean-definition-overriding: true
+logging:
+  level:
+    org.springframework.web: DEBUG
+    root: INFO
+
+frontend:
+  url: ${MS_INVENTORY_FRONTEND_URL}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: env
